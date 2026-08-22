@@ -1,0 +1,32 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SSH Terminal · FXHL WebTool</title><link rel="stylesheet" href="/assets/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css"></head>
+<body data-page="ssh"><main class="shell">
+<section class="hero" style="padding-bottom:10px"><div><span class="kicker">WEB SSH</span><h1 style="font-size:clamp(42px,7vw,72px)">Terminal VPS<br><span class="accent">di browser.</span></h1><p class="lead">Koneksi langsung dari backend Node ke SSH VPS. Password atau private key hanya dipakai saat membuat koneksi.</p></div><aside class="hero-card blue"><div class="mini">STATUS</div><div><div id="sshHeroStatus" class="big-number" style="font-size:46px">OFFLINE</div><div class="tiny strong" data-global-status>Memeriksa...</div></div></aside></section>
+
+<section class="section split">
+<div class="card">
+  <h2>Koneksi SSH</h2>
+  <div class="field"><label>Host / IP</label><input id="host" class="input" placeholder="1.2.3.4 atau vps.domain.com"></div>
+  <div class="form-grid"><div class="field"><label>Port</label><input id="port" class="input" type="number" value="22"></div><div class="field"><label>Username</label><input id="username" class="input" value="root"></div></div>
+  <div class="field"><label>Metode login</label><select id="authType" class="select"><option value="password">Password</option><option value="privateKey">Private Key</option></select></div>
+  <div id="passwordWrap" class="field"><label>Password</label><input id="password" class="input" type="password" autocomplete="off" placeholder="Password SSH"></div>
+  <div id="keyWrap" style="display:none"><div class="field"><label>Private Key</label><textarea id="privateKey" class="textarea" placeholder="-----BEGIN OPENSSH PRIVATE KEY-----"></textarea></div><div class="field"><label>Passphrase (opsional)</label><input id="passphrase" class="input" type="password"></div></div>
+  <label class="tiny"><input id="rememberHost" type="checkbox"> Simpan host + username di perangkat ini (tanpa password/key)</label>
+  <div class="actions" style="margin-top:14px"><button id="connectBtn" class="btn primary">Connect</button><button id="disconnectBtn" class="btn danger">Disconnect</button></div>
+  <div id="connectMsg" class="alert" style="margin-top:12px">Belum ada koneksi.</div>
+</div>
+<div>
+  <div class="terminal-wrap"><div class="terminal-bar"><span>FXHL TERMINAL</span><span id="termLabel">not connected</span></div><div id="terminal" class="terminal"></div></div>
+</div>
+</section>
+
+<section class="section"><div class="section-head"><div><h2>Server stats</h2><p>Ringkasan cepat tanpa perlu mengetik command.</p></div><button id="refreshStats" class="btn small yellow">Refresh</button></div>
+<div class="grid">
+<div class="metric col-3"><div class="metric-label">Hostname</div><div id="mHost" class="metric-value">—</div></div>
+<div class="metric col-3"><div class="metric-label">Uptime</div><div id="mUptime" class="metric-value" style="font-size:17px">—</div></div>
+<div class="metric col-3"><div class="metric-label">Memory</div><div id="mMemory" class="metric-value">—</div><div class="progress"><i id="memBar"></i></div></div>
+<div class="metric col-3"><div class="metric-label">Disk /</div><div id="mDisk" class="metric-value">—</div><div class="progress"><i id="diskBar"></i></div></div>
+</div></section>
+
+<section class="section grid"><div class="card col-5"><h2>Quick commands</h2><p class="muted tiny">Command sudah ditentukan server-side supaya tombol ini aman dan konsisten.</p><div id="shortcuts" class="actions"></div></div><div class="card col-7"><h2>Output shortcut</h2><pre id="shortcutOutput" class="result">Pilih quick command…</pre></div></section>
+<div class="footer-note"><span>WebSocket terminal aktif selama halaman ini terbuka.</span><span>Gunakan HTTPS dan batasi host SSH jika website dipublikasikan.</span></div>
+</main><script src="/socket.io/socket.io.js"></script><script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/lib/xterm.js"></script><script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit@0.10.0/lib/addon-fit.js"></script><script src="/assets/common.js"></script><script src="/assets/ssh.js"></script></body></html>
