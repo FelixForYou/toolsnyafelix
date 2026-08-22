@@ -1,0 +1,14 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Settings · FXHL WebTool</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body data-page="settings"><main class="shell">
+<section class="hero" style="padding-bottom:10px"><div><span class="kicker">CONFIG & SECURITY</span><h1 style="font-size:clamp(42px,7vw,72px)">Setting singkat.<br><span class="accent">Tanpa API key.</span></h1><p class="lead">Tidak ada app password dan tidak ada konfigurasi BetaBotz. Environment hanya untuk runtime/session dan optional SSH allowlist.</p></div><aside class="hero-card green"><div class="mini">CONFIG</div><div class="big-number">.ENV</div><div class="tiny strong">Restart proses Node setelah mengubah environment.</div></aside></section>
+<section class="section grid">
+<div class="card col-6"><h2>Runtime status</h2><div id="runtimeStatus" class="grid"><div class="metric col-6"><div class="metric-label">Web Access</div><div id="sAuth" class="metric-value">—</div></div><div class="metric col-6"><div class="metric-label">BetaBotz</div><div class="metric-value">OFF</div></div><div class="metric col-6"><div class="metric-label">App Password</div><div class="metric-value">OFF</div></div><div class="metric col-6"><div class="metric-label">SSH Session</div><div id="sSsh" class="metric-value">—</div></div></div></div>
+<div class="card yellow col-6"><h2>Environment minimal</h2><pre class="code">PORT=3000
+NODE_ENV=production
+COOKIE_SECURE=auto
+SESSION_SECRET=random-panjang-minimal-32
+ALLOWED_SSH_HOSTS=</pre><p class="tiny"><code>ALLOWED_SSH_HOSTS</code> boleh kosong, atau isi IP/domain VPS dipisah koma.</p></div>
+<div class="card col-7"><h2>Deploy SSH backend</h2><ol><li>Upload/extract project ke VPS/Pterodactyl.</li><li>Jalankan <code>npm install</code>.</li><li>Isi environment.</li><li>Startup: <code>npm start</code>.</li><li>Proxy domain HTTPS ke port 3000 dan teruskan WebSocket.</li></ol><div class="alert warn">SSH membutuhkan proses Node persistent + WebSocket + akses TCP 22. Vercel serverless tidak menyediakan model koneksi ini untuk terminal SSH interaktif.</div></div>
+<div class="card red col-5"><h2>Security checklist</h2><p>Karena dashboard terbuka langsung, batasi <b>ALLOWED_SSH_HOSTS</b>, gunakan HTTPS, dan lindungi domain dengan Cloudflare Access/WAF jika web bersifat publik.</p><button id="disconnectSettings" class="btn yellow">Putuskan SSH browser ini</button></div>
+</section>
+</main><script src="/assets/common.js"></script><script src="/assets/settings.js"></script></body></html>
